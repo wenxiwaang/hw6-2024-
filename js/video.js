@@ -64,27 +64,21 @@ function advanceVideo() {
 }
 
 console.log('Muting the video');
-let muting = document.querySelector('#mute');
-mute.addEventListener('click',soundVideo);
+let mute = document.querySelector('#mute');
+mute.addEventListener('click',function(){
+	let video = document.querySelector('#player1');
+	video.muted = !video.muted;
+	mute.innerHTML = video.muted ? 'Unmute':'Mute';
+})
 
-function soundVideo() {
-	if (vid.muted) {
-		vid.muted = false;
-		mute.textContent = 'Mute';
-	} else {
-		vid.muted = true;
-		mute.textContent = 'Unmate';
-	}
-} 
-
-let volumeSlider = document.getElementById('slider');
-
+let volumeSlider = document.querySelector('#slider');
 volumeSlider.addEventListener('change', function(){
-
 	currentValue = volumeSlider.value;
 	console.log('Current value is ', currentValue);
+	console.log(vid.volume);
 	vid.volume = currentValue / 100; 
-	document.getElementById('volume').innerHTML= (vid.volume * 100) + '%';
+	console.log(vid.volume);
+	document.querySelector('#volume').innerHTML= (vid.volume * 100) + '%';
 })
 
 let style = document.querySelector('#vintage');
