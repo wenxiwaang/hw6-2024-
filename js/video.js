@@ -78,7 +78,7 @@ volumeSlider.addEventListener('change', function(){
 	console.log(vid.volume);
 	vid.volume = currentValue / 100; 
 	console.log(vid.volume);
-	document.querySelector('#volume').innerHTML= (vid.volume * 100) + '%';
+	document.querySelector('#volume').innerHTML= vid.volume + '%';
 })
 
 let style = document.querySelector('#vintage');
