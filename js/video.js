@@ -9,22 +9,22 @@ window.addEventListener('load', function() {
 	console.log('Loop is set to ' + video.loop);
 });
 
-console.log('Play Video');
-let vid = document.getElementById('player1'); 
-let play = document.querySelector('#play');
-play.addEventListener('click', playVid);
-
-function playVid() { 
-  vid.play(); 
-}
-
+let playButton = document.querySelector("#play");
+let getVolume = document.querySelector("#volume")
+playButton.addEventListener("click",function(){
+	// i want the video play
+	let video = document.querySelector("#player1");
+	console.log(video);
+	video.play();
+	document.querySelector("#volume").innerHTML = video.volume*100+'%';
+});
 
 console.log('Pause Video');
 let pause = document.querySelector('#pause');
 pause.addEventListener('click', pauseVid);
 
 function pauseVid() { 
-	vid.pause(); 
+	video.pause(); 
 }
 
 
@@ -34,8 +34,8 @@ let slow = document.querySelector('#slower');
 slow.addEventListener('click',setPlaySpeed);
 let currentSpeed = 1;
 function setPlaySpeed() {
-	vid.playbackRate = currentSpeed - 0.1*currentSpeed;
-	currentSpeed = vid.playbackRate;
+	video.playbackRate = currentSpeed - 0.1*currentSpeed;
+	currentSpeed = video.playbackRate;
 	console.log('New Speed: ' + currentSpeed);
 } 
 
@@ -44,8 +44,8 @@ let fast = document.querySelector('#faster');
 fast.addEventListener('click',setSpeedfaster);
 
 function setSpeedfaster() {
-	currentSpeed = vid.playbackRate / (1 - 0.1);
-	vid.playbackRate = currentSpeed;
+	currentSpeed = video.playbackRate / (1 - 0.1);
+	video.playbackRate = currentSpeed;
 	console.log('New Speed: ' + currentSpeed);
 }
 
@@ -55,12 +55,12 @@ let skipping = document.querySelector('#skip');
 skip.addEventListener('click', advanceVideo);
 
 function advanceVideo() {
-	if ((vid.currentTime + 10) > vid.duration) {
-		vid.currentTime = 0;
+	if ((video.currentTime + 10) > video.duration) {
+		video.currentTime = 0;
 	} else {
-		vid.currentTime += 10;
+		video.currentTime += 10;
 	}
-	console.log('Current time after skipping: ' + vid.currentTime + ' seconds');
+	console.log('Current time after skipping: ' + video.currentTime + ' seconds');
 }
 
 console.log('Muting the video');
@@ -71,14 +71,15 @@ mute.addEventListener('click',function(){
 	mute.innerHTML = video.muted ? 'Unmute':'Mute';
 })
 
+
 let volumeSlider = document.querySelector('#slider');
 volumeSlider.addEventListener('change', function(){
 	currentValue = volumeSlider.value;
 	console.log('Current value is ', currentValue);
-	console.log(vid.volume);
-	vid.volume = currentValue / 100; 
-	console.log(vid.volume);
-	document.querySelector('#volume').innerHTML= vid.volume + '%';
+	console.log(video.volume);
+	video.volume = currentValue/100;
+	console.log(video.volume);
+	document.querySelector('#volume').innerHTML= video.volume*100 + '%';
 })
 
 let style = document.querySelector('#vintage');
